@@ -89,5 +89,29 @@ print(parameters)
 
 
 
+CSV_dir = "CSVFiles"
+
+os.makedirs(CSV_dir, exist_ok=True)
+
+for i in range(len(StampedDataArray)):
+
+    CSVfile = os.path.join(CSV_dir, f"interval{i+1}.csv")
+
+    with open(CSVfile, mode = 'w', newline= "") as csvfile:
+
+        csvwriter = csv.writer(csvfile)
+
+        header = ["Timestamp"] + parameters
+
+        csvwriter.writerow(header)
+
+        for row in StampedDataArray[i]:
+
+            csvwriter.writerow(row)
+
+    print(f"Interval {i+1} written to {CSVfile}")
+    
+
+
 
 
