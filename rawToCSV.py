@@ -124,7 +124,7 @@ for i in range(len(StampedDataArray)):
             csvwriter.writerow(row)
 
 
-    print(f"Interval {i+1} written to {CSVfile}")
+    #print(f"Interval {i+1} written to {CSVfile}")
     
 
 
