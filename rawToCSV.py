@@ -19,72 +19,85 @@ intervals = []
 
 
 for line in lines:
+
     start_str, end_str = line.split("#")
 
     start = pd.Timestamp(start_str)
-    end = pd.Timestamp(end_str)
 
+    end = pd.Timestamp(end_str)
 
     ts_range = pd.date_range(start=start, end=end, freq="1S")
 
     intervals.append(ts_range)
 
 
+
+
+
 UnStampedData = []
 
 
 for i in range(len(intervals)):
+
     UnStampedDataForSingleInterval = []
 
-    #for j in range(len(intervals[i])):
-
-        #stampData.append([intervals[i][j]])
-
     for parameter in parameters:
+
 
         file_path = os.path.join(data, parameter , f"interval{str(i+1)}")
 
         with open(file_path , "r") as DataFile:
 
             lines = [float(line.strip()) for line in DataFile]
+
             UnStampedDataForSingleInterval.append(lines)
+
 
     UnStampedData.append(UnStampedDataForSingleInterval)
 
-    #print(np.array(UnStampedDataForSingleInterval).shape)
-    #print(f"Interval {i+1}: {np.array(UnStampedDataForSingleInterval, dtype=object).shape}")
+    
 
 
-#UnStampedDataArray = np.array(UnStampedData, dtype=object)
-#print(UnStampedDataArray.shape)
 
-#print(UnStampedDataArray[0][0][:10])
-#print(parameters[0])
+
+
 
 StampedData = []
 
 for i in range(len(intervals)):
+
     StampedDataForSingleInterval = []
 
+
     for j in range(len(intervals[i])):
+
         StampedDataForSingleStamp = [intervals[i][j]]
+
 
         for k in range(len(parameters)):
 
             StampedDataForSingleStamp.append(UnStampedData[i][k][j])
             
+
         StampedDataForSingleInterval.append(StampedDataForSingleStamp)
 
+
     print(np.array(StampedDataForSingleInterval).shape)
+    
     print(f"Interval {i+1}: {np.array(StampedDataForSingleInterval, dtype=object).shape}")
 
 
     StampedData.append(StampedDataForSingleInterval)
 
+
 StampedDataArray = np.array(StampedData, dtype=object)
+
 print(StampedDataArray.shape)
+
 print(StampedDataArray[0][0][:27])
+
 print(len(StampedDataArray))
+
 print(parameters)
 
 
@@ -105,9 +118,11 @@ for i in range(len(StampedDataArray)):
 
         csvwriter.writerow(header)
 
+
         for row in StampedDataArray[i]:
 
             csvwriter.writerow(row)
+
 
     print(f"Interval {i+1} written to {CSVfile}")
     
