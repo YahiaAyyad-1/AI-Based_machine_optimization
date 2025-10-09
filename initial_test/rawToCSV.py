@@ -7,6 +7,9 @@ data = "data"
 
 parameters = [d for d in os.listdir(data) if os.path.isdir(os.path.join(data, d))]
 
+DCCT1_BoosterCurrent = parameters.pop(15)
+parameters.append( DCCT1_BoosterCurrent)
+
 
 
 with open("intervals.txt", "r") as intervalsFile:
