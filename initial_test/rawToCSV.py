@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import numpy as np
 import csv
+from datetime import datetime
 
 data = "data"
 
@@ -25,9 +26,17 @@ for line in lines:
 
     start_str, end_str = line.split("#")
 
-    start = pd.Timestamp(start_str)
+    start_2 = datetime.strptime(start_str, "%Y-%m-%dT%H:%M:%S.%fZ")
 
-    end = pd.Timestamp(end_str)
+    start_formated = start_2.strftime("%Y.%m.%d %H:%M:%S")
+
+    end_2 = datetime.strptime(end_str, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+    end_formated = end_2.strftime("%Y.%m.%d %H:%M:%S")
+
+    start = pd.Timestamp(start_formated)
+
+    end = pd.Timestamp(end_formated)
 
     ts_range = pd.date_range(start=start, end=end, freq="1S")
 
