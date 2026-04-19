@@ -16,7 +16,8 @@ class VisionApp:
         self.window.configure(bg="#1e1e1e") # Dark theme
 
         # --- GStreamer Pipeline ---
-        self.vid = cv2.VideoCapture(self.gstreamer_pipeline(), cv2.CAP_GSTREAMER)
+        self.vid = cv2.VideoCapture(0)
+        #self.vid = cv2.VideoCapture(self.gstreamer_pipeline(), cv2.CAP_GSTREAMER)
 
         # --- Layout Setup ---
         # Left Side: Camera Feed

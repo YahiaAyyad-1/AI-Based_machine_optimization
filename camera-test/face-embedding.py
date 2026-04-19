@@ -23,8 +23,8 @@ def gstreamer_pipeline(flip_method=2):
 
 def main():
     known_encodings, known_names = load_known_faces()
-    cap = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
-    
+    #cap = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
+    cap = cv2.VideoCapture(0)
     input_mode = False
     current_name = ""
     last_encoding = None

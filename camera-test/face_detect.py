@@ -1,6 +1,7 @@
 import cv2
-
-def gstreamer_pipeline(sensor_id=2, flip_method=0):
+import face_recognition
+from face_embedding import load_known_faces
+def gstreamer_pipeline(sensor_id=0, flip_method=0):
     return (
         "nvarguscamerasrc sensor-id=%d ! "
         "video/x-raw(memory:NVMM), width=1280, height=720, framerate=30/1 ! "
@@ -12,11 +13,13 @@ def gstreamer_pipeline(sensor_id=2, flip_method=0):
     )
 
 def main():
+    known_encodings, known_names = load_known_faces()
     # Load the pre-installed Haar Cascade for face detection
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
     # Initialize the camera using the GStreamer pipeline
-    cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=2), cv2.CAP_GSTREAMER)
+    cap = cv2.VideoCapture(0) 
+    #cap = cv2.VideoCapture(gstreamer_pipeline(flip_method=2), cv2.CAP_GSTREAMER)
 
     if not cap.isOpened():
         print("Error: Could not open camera.")

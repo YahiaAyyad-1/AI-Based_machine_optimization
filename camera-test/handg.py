@@ -26,8 +26,8 @@ def gstreamer_pipeline(flip_method=2):
     )
 
 def main():
-    cap = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
-    
+    #cap = cv2.VideoCapture(gstreamer_pipeline(), cv2.CAP_GSTREAMER)
+    cap = cv2.VideoCapture(0)
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret: break
